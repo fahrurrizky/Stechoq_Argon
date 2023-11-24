@@ -64,7 +64,7 @@
   import ArgonTextarea from '@/components/ArgonTextarea.vue'
   import { ref } from 'vue'
   import { useRouter } from 'vue-router'
-  import { useTodoStore } from '@/store/list'
+  import { useListStore } from '@/store/list'
   
   export default {
 	components: {
@@ -74,7 +74,7 @@
 	},
 	setup() {
 	  const router = useRouter()
-	  const todo = useTodoStore()
+	  const todo = useListStore()
   
 	  const initialInput = {
 		title: '',

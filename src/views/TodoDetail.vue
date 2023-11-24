@@ -11,7 +11,7 @@
 								created by: <span>{{ todo.username }}</span>
 							</p>
 							<p class="mb-0">
-								created at: <span> {{ formatDateString(todo.createdAt) }} </span>
+								<!-- created at: <span> {{ formatDateString(todo.createdAt) }} </span> -->
 							</p>
 						</div>
 					</div>
@@ -51,12 +51,12 @@
 <script setup>
 import { onMounted, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { formatDateString } from '@/utils/formatDate'
+// import { formatDateString } from '@/utils/formatDate'
 
 import * as s$todo from '@/services/todo'
-import { useTodoStore } from '@/store/todo'
+import { useListStore } from '@/store/list'
 
-const store = useTodoStore()
+const store = useListStore()
 
 const route = useRoute()
 const router = useRouter()

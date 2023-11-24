@@ -99,11 +99,9 @@ export default {
                     <a class="text-primary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">Edit</a>
                 </router-link>
                 <span class="mx-1"> </span>
-                <router-link to="/todo-create">
                     <a class="text-danger font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Delete user">Delete</a>
-                </router-link>
                 <span class="mx-1"> </span>
-                <router-link to="/todo-create">
+                <router-link to="/todo-detail">
                     <a class="text-success font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Delete user">Detail</a>
                 </router-link>
               </td>

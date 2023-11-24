@@ -7,6 +7,9 @@ import RTL from "../views/Rtl.vue";
 import Profile from "../views/Profile.vue";
 import Signup from "../views/Signup.vue";
 import Signin from "../views/Signin.vue";
+// import TodoCreate from "../views/TodoCreate.vue"
+// import TodoDetail from "../views/TodoDetail.vue"
+// import TodoEdit from "../views/TodoEdit.vue"
 
 const routes = [
   {
@@ -54,6 +57,21 @@ const routes = [
     name: "Signup",
     component: Signup,
   },
+  // {
+  //   path: "/todo-create",
+  //   name: "Todo Create",
+  //   component: TodoCreate,
+  // },
+  // {
+  //   path: "/todo-detail",
+  //   name: "Todo Create",
+  //   component: TodoDetail,
+  // },
+  // {
+  //   path: "/todo-edit",
+  //   name: "Todo Create",
+  //   component: TodoEdit,
+  // },
   
 ];
 

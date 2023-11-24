@@ -1,3 +1,42 @@
+<script>
+import Breadcrumbs from "../Breadcrumbs.vue";
+import { mapMutations, mapActions } from "vuex";
+import { d$auth } from '@/store/auth'
+
+export default {
+  name: "navbar",
+  data() {
+    return {
+      user: d$auth().g$user,
+      showMenu: false
+    };
+  },
+  props: ["minNav", "textWhite"],
+  created() {
+    this.minNav;
+  },
+  methods: {
+    ...mapMutations(["navbarMinimize", "toggleConfigurator"]),
+    ...mapActions(["toggleSidebarColor"]),
+
+    toggleSidebar() {
+      this.toggleSidebarColor("bg-white");
+      this.navbarMinimize();
+    }
+  },
+  components: {
+    Breadcrumbs
+  },
+  computed: {
+    currentRouteName() {
+      return this.$route.name;
+    }
+  }
+};
+</script>
+
+
+
 <template>
   <nav
     class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl"
@@ -36,9 +75,9 @@
         <ul class="navbar-nav justify-content-end">
           <li class="nav-item d-flex align-items-center">
             <router-link
-              :to="{ name: 'Signin' }"
+              :to="{ name: 'Profile' }"
               class="px-0 nav-link font-weight-bold text-white"
-              target="_blank"
+
             >
               <i
                 class="fa fa-user"
@@ -47,7 +86,7 @@
               <span v-if="this.$store.state.isRTL" class="d-sm-inline d-none"
                 >يسجل دخول</span
               >
-              <span v-else class="d-sm-inline d-none">Sign In</span>
+              <span v-else class="d-sm-inline d-none">{{ user.name }}</span>
             </router-link>
           </li>
           <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
@@ -197,37 +236,6 @@
     </div>
   </nav>
 </template>
-<script>
-import Breadcrumbs from "../Breadcrumbs.vue";
-import { mapMutations, mapActions } from "vuex";
 
-export default {
-  name: "navbar",
-  data() {
-    return {
-      showMenu: false
-    };
-  },
-  props: ["minNav", "textWhite"],
-  created() {
-    this.minNav;
-  },
-  methods: {
-    ...mapMutations(["navbarMinimize", "toggleConfigurator"]),
-    ...mapActions(["toggleSidebarColor"]),
 
-    toggleSidebar() {
-      this.toggleSidebarColor("bg-white");
-      this.navbarMinimize();
-    }
-  },
-  components: {
-    Breadcrumbs
-  },
-  computed: {
-    currentRouteName() {
-      return this.$route.name;
-    }
-  }
-};
-</script>
+

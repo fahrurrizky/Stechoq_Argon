@@ -19,16 +19,15 @@
         <sidenav-item
           url="/tables"
           :class="getRoute() === 'tables' ? 'active' : ''"
-          :navText="this.$store.state.isRTL ? 'الجداول' : 'Tables'"
+          :navText="this.$store.state.isRTL ? 'الجداول' : 'Table'"
         >
-          <template v-slot:icon>
-            <i
-              class="ni ni-calendar-grid-58 text-warning text-sm opacity-10"
-            ></i>
-          </template>
+        <template v-slot:icon>
+          <i class="fas fa-list-alt text-success text-sm opacity-10"></i>
+        </template>
+
         </sidenav-item>
       </li>
-      <li class="nav-item">
+      <!-- <li class="nav-item">
         <sidenav-item
           url="/billing"
           :class="getRoute() === 'billing' ? 'active' : ''"
@@ -62,7 +61,7 @@
             <i class="ni ni-world-2 text-danger text-sm opacity-10"></i>
           </template>
         </sidenav-item>
-      </li>
+      </li> -->
       <li class="mt-3 nav-item">
         <h6
           v-if="this.$store.state.isRTL"
@@ -90,7 +89,7 @@
           </template>
         </sidenav-item>
       </li>
-      <li class="nav-item">
+      <li v-if="!loggedIn" class="nav-item">
         <sidenav-item
           url="/signin"
           :class="getRoute() === 'signin' ? 'active' : ''"
@@ -101,7 +100,7 @@
           </template>
         </sidenav-item>
       </li>
-      <li class="nav-item">
+      <li  v-if="!loggedIn" class="nav-item">
         <sidenav-item
           url="/signup"
           :class="getRoute() === 'signup' ? 'active' : ''"
@@ -112,6 +111,13 @@
           </template>
         </sidenav-item>
       </li>
+      <li v-if="loggedIn" class="nav-item" @click="logout">
+				<sidenav-item url="/dashboard-default" :navText="'Logout'">
+					<template v-slot:icon>
+						<i class="fas fa-sign-out-alt text-danger text-sm opacity-10"></i>
+					</template>
+				</sidenav-item>
+			</li>
     </ul>
   </div>
   <div class="pt-3 mx-3 mt-3 sidenav-footer">
@@ -125,6 +131,11 @@
 <script>
 import SidenavItem from "./SidenavItem.vue";
 import SidenavCard from "./SidenavCard.vue";
+import { delCookies } from '@/plugins/cookies'
+import { d$auth } from '@/store/auth'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
 
 export default {
   name: "SidenavList",
@@ -135,7 +146,8 @@ export default {
     return {
       title: "Argon Dashboard 2",
       controls: "dashboardsExamples",
-      isActive: "active"
+      isActive: "active",
+      loggedIn: d$auth().isLoggedIn
     };
   },
   components: {
@@ -146,7 +158,14 @@ export default {
     getRoute() {
       const routeArr = this.$route.path.split("/");
       return routeArr[1];
-    }
+    },
+    logout() {
+			delCookies('CERT')
+			this.$router.push({
+				name: 'Dashboard'
+			})
+			window.location.reload()
+		}
   }
 };
 </script>

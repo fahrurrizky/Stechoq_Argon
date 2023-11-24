@@ -1,3 +1,38 @@
+<script>
+import Navbar from "@/examples/PageLayout/Navbar.vue";
+import AppFooter from "@/examples/PageLayout/Footer.vue";
+import ArgonInput from "@/components/ArgonInput.vue";
+import ArgonCheckbox from "@/components/ArgonCheckbox.vue";
+import ArgonButton from "@/components/ArgonButton.vue";
+const body = document.getElementsByTagName("body")[0];
+
+export default {
+  name: "signin",
+  components: {
+    Navbar,
+    AppFooter,
+    ArgonInput,
+    ArgonCheckbox,
+    ArgonButton,
+  },
+  created() {
+    this.$store.state.hideConfigButton = true;
+    this.$store.state.showNavbar = false;
+    this.$store.state.showSidenav = false;
+    this.$store.state.showFooter = false;
+    body.classList.remove("bg-gray-100");
+  },
+  beforeUnmount() {
+    this.$store.state.hideConfigButton = false;
+    this.$store.state.showNavbar = true;
+    this.$store.state.showSidenav = true;
+    this.$store.state.showFooter = true;
+    body.classList.add("bg-gray-100");
+  },
+};
+</script>
+
+
 <template>
   <div class="container top-0 position-sticky z-index-sticky">
     <div class="row">
@@ -98,7 +133,7 @@
             <div class="card-body">
               <form role="form">
                 <argon-input type="text" placeholder="Name" aria-label="Name" />
-                <argon-input type="email" placeholder="Email" aria-label="Email" />
+                <argon-input type="text" placeholder="Username" aria-label="Username" />
                 <argon-input type="password" placeholder="Password" aria-label="Password" />
                 <argon-checkbox checked>
                   <label class="form-check-label" for="flexCheckDefault">
@@ -115,7 +150,7 @@
                 <p class="text-sm mt-3 mb-0">
                   Already have an account?
                   <a
-                    href="javascript:;"
+                    href="/signin"
                     class="text-dark font-weight-bolder"
                   >Sign in</a>
                 </p>
@@ -129,36 +164,4 @@
   <app-footer />
 </template>
 
-<script>
-import Navbar from "@/examples/PageLayout/Navbar.vue";
-import AppFooter from "@/examples/PageLayout/Footer.vue";
-import ArgonInput from "@/components/ArgonInput.vue";
-import ArgonCheckbox from "@/components/ArgonCheckbox.vue";
-import ArgonButton from "@/components/ArgonButton.vue";
-const body = document.getElementsByTagName("body")[0];
 
-export default {
-  name: "signin",
-  components: {
-    Navbar,
-    AppFooter,
-    ArgonInput,
-    ArgonCheckbox,
-    ArgonButton,
-  },
-  created() {
-    this.$store.state.hideConfigButton = true;
-    this.$store.state.showNavbar = false;
-    this.$store.state.showSidenav = false;
-    this.$store.state.showFooter = false;
-    body.classList.remove("bg-gray-100");
-  },
-  beforeUnmount() {
-    this.$store.state.hideConfigButton = false;
-    this.$store.state.showNavbar = true;
-    this.$store.state.showSidenav = true;
-    this.$store.state.showFooter = true;
-    body.classList.add("bg-gray-100");
-  },
-};
-</script>

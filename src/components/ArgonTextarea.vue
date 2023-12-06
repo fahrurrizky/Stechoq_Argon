@@ -4,6 +4,7 @@
       <slot />
     </label>
     <textarea
+			@input="$emit('update:modelValue', $event.target.value)"
       class="form-control"
       rows="5"
       :placeholder="placeholder"
@@ -14,10 +15,12 @@
 
 <script>
 export default {
-  name: "argon-textarea",
-  props: {
-    id: String,
-    placeholder: String,
-  },
-};
+	name: 'argon-textarea',
+	props: {
+		id: String,
+		placeholder: String,
+		modelValue: String
+	},
+	emits: ['update:modelValue']
+}
 </script>
